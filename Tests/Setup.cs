@@ -1,7 +1,6 @@
 ﻿using AdCodicem.SpecFlow.MicrosoftDependencyInjection;
+using ExternalSteps;
 using Microsoft.Extensions.DependencyInjection;
-using System.Linq;
-using TechTalk.SpecFlow;
 
 namespace Tests
 {
@@ -9,15 +8,12 @@ namespace Tests
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            // Without this it fails
-            //var specFlowTypes = System.AppDomain.CurrentDomain.GetAssemblies()
-            //    .SelectMany(assembly => assembly.GetTypes())
-            //    .Where(a => System.Attribute.IsDefined(a, typeof(BindingAttribute)));
+            var config = new ExternalConfig
+            {
+                Id = "From ConfigureServices"
+            };
 
-            //foreach (var type in specFlowTypes)
-            //{
-            //    services.AddScoped(type!);
-            //}
+            services.AddSingleton(config);
         }
     }
 }
